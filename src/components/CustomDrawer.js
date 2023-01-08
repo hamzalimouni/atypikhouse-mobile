@@ -5,20 +5,9 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { AuthContext } from '../context/AuthContext';
 import { Avatar } from '@react-native-material/core';
 import BG_IMG from '../../assets/images/BG_IMG.jpg';
-// import Share from 'react-native-share';
 
 const CustomDrawer = (props) => {
     const { logout, userInfo } = useContext(AuthContext);
-    // const myCustomShare = async () => {
-    //     const shareOptions = {
-    //         message: 'this is a test message ',
-    //     }
-    //     try {
-    //         shareResponse = await Share.open(shareOptions);
-    //     } catch (error) {
-    //         console.log('Error => ', error);
-    //     }
-    // };
     const customAlert = () => {
         Alert.alert('Attention', 'Vous voulez déconnectée ?',
             [
@@ -50,16 +39,10 @@ const CustomDrawer = (props) => {
                 </View>
             </DrawerContentScrollView>
             <View style={styles.footerWrapper}>
-                <TouchableOpacity onPress={() => { myCustomShare }} style={{ paddingVertical: 15 }}>
-                    <View style={styles.share}>
-                        <Ionicons name='share-social-outline' size={22} />
-                        <Text style={styles.shareText}>Partager</Text>
-                    </View>
-                </TouchableOpacity>
                 <TouchableOpacity onPress={() => { customAlert() }} style={{ paddingVertical: 15 }}>
-                    <View style={styles.share}>
+                    <View style={styles.logout}>
                         <Ionicons name='exit-outline' size={22} />
-                        <Text style={styles.shareText}>Deconnexion</Text>
+                        <Text style={styles.logoutText}>Deconnexion</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -95,11 +78,11 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderTopColor: '#CCC',
     },
-    share: {
+    logout: {
         flexDirection: 'row',
         alignItems: 'center',
     },
-    shareText: {
+    logoutText: {
         marginLeft: 10,
         fontSize: 15,
         fontWeight: 'bold',

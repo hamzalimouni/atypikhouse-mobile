@@ -25,7 +25,7 @@ const HousesDetails = ({ route }) => {
 
     const getReservation = () => {
         setIsLoading(true);
-        fetch(`${API_URL}/reservations?house.id=${route.params.paramKey}`, {
+        fetch(`${API_URL}/reservations?house.id=${route.params.paramKey}&order[createdAt]=desc`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

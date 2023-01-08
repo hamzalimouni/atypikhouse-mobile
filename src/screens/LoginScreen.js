@@ -49,13 +49,7 @@ const LoginScreen = () => {
                     placeholder="Entrer Mot de passe"
                     secureTextEntry={true} />
                 <CustomButton text="Connexion" onPress={() => { login(email, password) }} />
-                <CustomButton text="Mot de passe oublié?" onPress={onForgotPasswordPressed} type="TERTIARY" />
-                {/* <View style={styles.register}>
-                    <Text>Vous-avez pas un compte? </Text>
-                    <TouchableOpacity onPress={openLinkInBrowserHandler}>
-                        <Text style={styles.link}>Inscription</Text>
-                    </TouchableOpacity>
-                </View> */}
+                {/* <CustomButton text="Mot de passe oublié?" onPress={onForgotPasswordPressed} type="TERTIARY" /> */}
             </View>
         </View>
     );

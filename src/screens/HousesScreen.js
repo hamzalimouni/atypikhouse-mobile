@@ -19,8 +19,9 @@ const HousesScreen = () => {
     const navigation = useNavigation();
 
     useEffect(() => {
-        getHouses();
-    }, [])
+        setIsLoading(true)
+        userInfo && getHouses();
+    }, [userInfo])
 
     const getHouses = () => {
         setIsLoading(true);

@@ -16,9 +16,11 @@ const ReservationScreen = () => {
     const scrollY = React.useRef(new Animated.Value(0)).current;
     const [isLoading, setIsLoading] = useState(false);
     const [reservations, setReservations] = useState(null);
+
     useEffect(() => {
-        getReservation();
-    }, [])
+        setIsLoading(true)
+        userInfo && getReservation();
+    }, [userInfo])
 
     const getReservation = () => {
         setIsLoading(true);

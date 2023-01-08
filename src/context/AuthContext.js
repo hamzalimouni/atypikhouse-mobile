@@ -63,6 +63,7 @@ export const AuthProvider = ({ children }) => {
             .then(res => {
                 setIsLoading(false);
                 setUserInfo(res);
+                console.log(userToken);
             });
     };
 

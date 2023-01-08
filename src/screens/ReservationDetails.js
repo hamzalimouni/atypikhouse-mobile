@@ -86,7 +86,6 @@ const ReservationDetails = ({ route }) => {
         fetch(`${API_URL}/reviews`, {
             method: 'POST',
             headers: {
-                Accept: 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': 'bearer ' + userToken,
             },
@@ -94,10 +93,10 @@ const ReservationDetails = ({ route }) => {
                 grade: rating + 1,
                 comment: comment,
                 user: {
-                    id: 4,
+                    id: userInfo?.id,
                 },
                 house: {
-                    id: 12,
+                    id: reservation?.house?.id,
                 },
             }),
         }).then(
@@ -136,61 +135,63 @@ const ReservationDetails = ({ route }) => {
                 style={StyleSheet.absoluteFillObject}
                 blurRadius={70}
             />
-            <View style={styles.wrap}>
-                <ScrollView
-                    onScroll={({ nativeEvent }) => onchange(nativeEvent)}
-                    showsHorizontalScrollIndicator={false}
-                    pagingEnabled
-                    horizontal
-                    style={styles.wrap}
-                >
-                    {
-                        reservation?.house?.images?.map((e, index) =>
-                            <Image
-                                key={e}
-                                resizeMode='stretch'
-                                style={styles.wrap}
-                                source={{ uri: MEDIA_URL + e?.fileName }}
-                            />
-                        )
-                    }
-                </ScrollView>
-                <View style={styles.wrapDot}>
-                    {
-                        reservation?.house?.images?.map((e, index) =>
-                            <Text
-                                key={e}
-                                style={imgActive == index ? styles.dotActive : styles.dotInactive}
-                            >●</Text>
-                        )
-                    }
-                </View>
-            </View>
-            <View style={styles.contentWrap}>
-                <Text style={styles.titleHouse}>{reservation?.house?.title}</Text>
-                <View style={styles.dateWrap}>
-                    <ProfileInput inputTitle="Arrivée" placeHolder="arrivée" value={moment(reservation?.fromDate).format('DD/MM/YYYY')} />
-                    <ProfileInput inputTitle="Départ" placeHolder="départ" value={moment(reservation?.toDate).format('DD/MM/YYYY')} />
-                    <ProfileInput inputTitle="Prix" placeHolder="prix" value={reservation?.amount + ' €'} />
-                </View>
-                <View>
-                    <RNTextArea
-                        maxCharLimit={400}
-                        placeholderTextColor="black"
-                        exceedCharCountColor="#990606"
-                        placeholder={"Write your review..."}
-                        onChangeText={setComment}
-                        value={comment}
-                        textAlignVertical='top'
-                    />
-                    <View style={styles.reviewWrap}>
-                        <View style={{ flexDirection: 'row' }}>{stars}</View>
-                        <Pressable onPress={() => { InsertComment() }} style={styles.reviewBtn}>
-                            <Text style={styles.reviexText}>Envoyer</Text>
-                        </Pressable>
+            <ScrollView>
+                <View style={styles.wrap}>
+                    <ScrollView
+                        onScroll={({ nativeEvent }) => onchange(nativeEvent)}
+                        showsHorizontalScrollIndicator={false}
+                        pagingEnabled
+                        horizontal
+                        style={styles.wrap}
+                    >
+                        {
+                            reservation?.house?.images?.map((e, index) =>
+                                <Image
+                                    key={e}
+                                    resizeMode='stretch'
+                                    style={styles.wrap}
+                                    source={{ uri: MEDIA_URL + e?.fileName }}
+                                />
+                            )
+                        }
+                    </ScrollView>
+                    <View style={styles.wrapDot}>
+                        {
+                            reservation?.house?.images?.map((e, index) =>
+                                <Text
+                                    key={e}
+                                    style={imgActive == index ? styles.dotActive : styles.dotInactive}
+                                >●</Text>
+                            )
+                        }
                     </View>
                 </View>
-            </View>
+                <View style={styles.contentWrap}>
+                    <Text style={styles.titleHouse}>{reservation?.house?.title}</Text>
+                    <View style={styles.dateWrap}>
+                        <ProfileInput inputTitle="Arrivée" placeHolder="arrivée" value={moment(reservation?.fromDate).format('DD/MM/YYYY')} />
+                        <ProfileInput inputTitle="Départ" placeHolder="départ" value={moment(reservation?.toDate).format('DD/MM/YYYY')} />
+                        <ProfileInput inputTitle="Prix" placeHolder="prix" value={reservation?.amount + ' €'} />
+                    </View>
+                    <View>
+                        <RNTextArea
+                            maxCharLimit={400}
+                            placeholderTextColor="black"
+                            exceedCharCountColor="#990606"
+                            placeholder={"Write your review..."}
+                            onChangeText={setComment}
+                            value={comment}
+                            textAlignVertical='top'
+                        />
+                        <View style={styles.reviewWrap}>
+                            <View style={{ flexDirection: 'row' }}>{stars}</View>
+                            <Pressable onPress={() => { InsertComment() }} style={styles.reviewBtn}>
+                                <Text style={styles.reviexText}>Envoyer</Text>
+                            </Pressable>
+                        </View>
+                    </View>
+                </View>
+            </ScrollView>
         </SafeAreaView>
     )
 }
