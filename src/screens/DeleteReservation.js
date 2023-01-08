@@ -22,9 +22,8 @@ const HEIGHT = Dimensions.get("window").height;
 const DeleteReservation = ({ route }) => {
     const { userInfo, userToken } = useContext(AuthContext);
     const [reservation, setReservation] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
     const [imgActive, setImgActive] = useState(0);
-    const [show, setShow] = useState(false);
+    const [isCanceled, setIsCanceled] = useState(false);
     useEffect(() => {
         setReservation(route.params.paramKey);
     }, [route.params.paramKey]);
@@ -47,7 +46,6 @@ const DeleteReservation = ({ route }) => {
     // };
 
     const annulerReservation = () => {
-        setIsLoading(true);
         fetch(API_URL + '/reservations/' + route.params.paramKey.id, {
             method: 'PATCH',
             headers: {
@@ -59,9 +57,9 @@ const DeleteReservation = ({ route }) => {
         })
             .then(res => res.json())
             .then((result) => {
-                setIsLoading(false);
                 if (result.status == 'CANCELED') {
                     alert('Réservation annulée avec succès');
+                    setIsCanceled(true)
                 } else {
                     alert('Impossible d\'annuler la réservation');
                 }
@@ -133,16 +131,12 @@ const DeleteReservation = ({ route }) => {
                     <ProfileInput inputTitle="Téléphone" placeHolder="téléphone" value={reservation?.user?.number} />
                 </View>
                 <View style={styles.BtnAnnuler}>
-                    <Text style={styles.titleAnnuler}>Annuler la reservation</Text>
-                    <CustomButton text="Annuler" onPress={() => customAlert()} type="DANGER" />
-                    {/* <SCLAlert
-                        theme="info"
-                        show={show}
-                        title="Lorem"
-                        subtitle="Lorem ipsum dolor"
-                    >
-                        <SCLAlertButton theme="info" onPress={customAlert()}>Done</SCLAlertButton>
-                    </SCLAlert> */}
+                    {
+                        reservation?.status  === "CANCELED" || isCanceled ?
+                            <Text style={styles.canceledTxt}>Réservation annulée</Text>
+                            :
+                            <CustomButton text="Annuler" onPress={() => customAlert()} type="DANGER" />
+                    }
                 </View>
             </View>
         </SafeAreaView>
@@ -181,6 +175,12 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         color: '#FFF',
+    },
+    canceledTxt: {
+        textAlign: 'center',
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#EE4B2B',
     },
     dateWrap: {
         flexDirection: 'row',

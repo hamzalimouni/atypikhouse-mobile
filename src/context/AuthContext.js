@@ -32,6 +32,7 @@ export const AuthProvider = ({ children }) => {
                     setUserToken(res.token);
                     AsyncStorage.setItem('userToken', res?.token);
                     AsyncStorage.setItem('userId', res?.data?.id.toString());
+                    getUserInfo();
                 }
             })
             .catch(e => {
@@ -63,7 +64,10 @@ export const AuthProvider = ({ children }) => {
             .then(res => {
                 setIsLoading(false);
                 setUserInfo(res);
-                console.log(userToken);
+                console.log(res);
+                if(res.code === 401){
+                    logout()
+                }
             });
     };
 

@@ -22,7 +22,7 @@ const RightDrawerContent = (props) => {
 
     const getNotifications = () => {
         setIsLoading(true);
-        fetch(`${API_URL}/notifications?user_id=${userInfo?.id}&order[createdAt]=desc`, {
+        fetch(`${API_URL}/notifications`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -37,8 +37,8 @@ const RightDrawerContent = (props) => {
     };
 
     useEffect(() => {
-        userInfo && getNotifications();
-    }, [userInfo])
+        getNotifications();
+    }, [])
 
 
     const renderItem = ({ item, index }) => {
@@ -76,7 +76,6 @@ const RightDrawerContent = (props) => {
 
     return (
         <View style={styles.container}>
-            <DrawerContentScrollView contentContainerStyle={styles.headerDrawer} keyboardDismissMode={true}>
                 <Image
                     source={BG_IMG}
                     style={StyleSheet.absoluteFillObject}
@@ -86,7 +85,6 @@ const RightDrawerContent = (props) => {
                     <Ionicons style={styles.iconStyle} name='notifications-outline' size={40} />
                     <Text style={styles.textTitle}>Notifications</Text>
                 </ImageBackground>
-            </DrawerContentScrollView>
             <View style={styles.drawerItem}>
                 <Animated.FlatList
                     data={notifications}
@@ -105,6 +103,7 @@ const RightDrawerContent = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop:40
     },
     headerDrawer: {
         backgroundColor: '#51a191',
