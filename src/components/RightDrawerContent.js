@@ -1,9 +1,7 @@
-import { View, Text, ImageBackground, Image, StyleSheet, TouchableOpacity, Alert, Animated, ActivityIndicator, SafeAreaView } from 'react-native';
-import { DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import { View, Text, ImageBackground, Image, StyleSheet, Animated } from 'react-native';
 import React, { useContext, useState, useEffect } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { AuthContext } from '../context/AuthContext';
-import { Avatar } from '@react-native-material/core';
 import BG_IMG from '../../assets/images/BG_IMG.jpg';
 import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import { API_URL } from '../../config';
@@ -14,10 +12,10 @@ const ITEM_PADDING = 10;
 const HEIGHT_IMG = 100;
 const ITEM_RADIUS = 20;
 const ITEM_SIZE = HEIGHT_IMG + ITEM_PADDING * 2 + ITEM_MARGIN;
-const RightDrawerContent = (props) => {
+const RightDrawerContent = () => {
     const [notifications, setNotifications] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const { userInfo, userToken } = useContext(AuthContext);
+    const { userToken } = useContext(AuthContext);
     const scrollY = React.useRef(new Animated.Value(0)).current;
 
     const getNotifications = () => {
@@ -76,15 +74,15 @@ const RightDrawerContent = (props) => {
 
     return (
         <View style={styles.container}>
-                <Image
-                    source={BG_IMG}
-                    style={StyleSheet.absoluteFillObject}
-                    blurRadius={70}
-                />
-                <ImageBackground style={styles.imgBC} >
-                    <Ionicons style={styles.iconStyle} name='notifications-outline' size={40} />
-                    <Text style={styles.textTitle}>Notifications</Text>
-                </ImageBackground>
+            <Image
+                source={BG_IMG}
+                style={StyleSheet.absoluteFillObject}
+                blurRadius={70}
+            />
+            <ImageBackground style={styles.imgBC} >
+                <Ionicons style={styles.iconStyle} name='notifications-outline' size={40} />
+                <Text style={styles.textTitle}>Notifications</Text>
+            </ImageBackground>
             <View style={styles.drawerItem}>
                 <Animated.FlatList
                     data={notifications}
@@ -103,7 +101,7 @@ const RightDrawerContent = (props) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop:40
+        paddingTop: 40
     },
     headerDrawer: {
         backgroundColor: '#51a191',

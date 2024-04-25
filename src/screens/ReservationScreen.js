@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState, useEffect, useContext } from "react";
-import { View, Text, Image, StyleSheet, SafeAreaView, ScrollView, StatusBar, FlatList, ActivityIndicator, Animated, Pressable } from "react-native";
+import { View, Text, Image, StyleSheet, SafeAreaView, FlatList, ActivityIndicator, Animated, Pressable } from "react-native";
 import { API_URL, MEDIA_URL } from "../../config";
 import { AuthContext } from "../context/AuthContext";
 import BG_IMG from '../../assets/images/BG_IMG.jpg';

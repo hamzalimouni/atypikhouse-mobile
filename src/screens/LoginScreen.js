@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, Text, Image, TextInput, Button, TouchableOpacity, StyleSheet, Linking } from "react-native";
+import { View, Text, Image, StyleSheet, Linking } from "react-native";
 import CustomInput from "../components/customInput";
 import CustomButton from "../components/CustomButton";
 import Logo from "../../assets/images/logo.png";

@@ -1,13 +1,10 @@
 import { View, ActivityIndicator } from 'react-native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React, { useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import AppStack from './AppStack';
 import AuthStack from './AuthStack';
 import { NavigationContainer } from '@react-navigation/native';
 
-
-const Stack = createNativeStackNavigator();
 const AppNav = () => {
     const { isLoading, userToken } = useContext(AuthContext);
     if (isLoading) {

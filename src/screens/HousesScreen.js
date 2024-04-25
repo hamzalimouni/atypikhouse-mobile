@@ -95,7 +95,6 @@ const HousesScreen = () => {
                         data={houses}
                         keyExtractor={item => `Key-${item.id}`}
                         renderItem={({ item, index }) => renderItem({ item, index })}
-                        // contentContainerStyle={{ padding: 20 }}
                         onScroll={Animated.event(
                             [{ nativeEvent: { contentOffset: { y: scrollY } } }],
                             { useNativeDriver: true },

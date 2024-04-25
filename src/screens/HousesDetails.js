@@ -6,7 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 import moment from 'moment/moment';
 import BG_IMG from '../../assets/images/BG_IMG.jpg';
 
-
 const ITEM_MARGIN = 20;
 const ITEM_PADDING = 10;
 const HEIGHT_IMG = 100;

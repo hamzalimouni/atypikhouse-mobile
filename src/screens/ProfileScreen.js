@@ -2,11 +2,9 @@ import { View, Text, StyleSheet, ScrollView, Image, ImageBackground } from 'reac
 import React, { useContext } from 'react';
 import ProfileInput from '../components/ProfileInput';
 import { AuthContext } from '../context/AuthContext';
-import { format } from 'date-fns';
 import { Avatar } from '@react-native-material/core';
 import moment from 'moment/moment';
 import BG_IMG from '../../assets/images/BG_IMG.jpg';
-
 
 const ProfileScreen = () => {
     const { userInfo } = useContext(AuthContext);
@@ -20,7 +18,6 @@ const ProfileScreen = () => {
             <ScrollView>
                 <View style={styles.header}></View>
                 <View style={styles.itemCenter}>
-                    {/* <Image source={Profile} style={styles.img} /> */}
                     <Avatar style={styles.img} size={120} autoColor={true} label={`${userInfo?.firstname} ${userInfo?.lastname}`} />
                     <Text style={styles.textUserName}>{`${userInfo?.firstname} ${userInfo?.lastname}`}</Text>
                 </View>
@@ -41,7 +38,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
     },
     header: {
-        // backgroundColor: '#00820B',
         height: 140,
     },
     itemCenter: {
